@@ -4,7 +4,7 @@ from models import Indicator, db
 
 indicators_bp = Blueprint("indicators", __name__)
 
-@indicators_bp.route("/indicators", methods=["GET"])
+@indicators_bp.route("/", methods=["GET"])
 @require_api_key
 def get_indicators():
     indicators = Indicator.query.all()
