@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db, User
 
-#password hashing
+# password hashing 
 def hash_password(password: str) -> str:
     """Return a hashed password."""
     return generate_password_hash(password)
@@ -16,13 +16,13 @@ def verify_password(password: str, password_hash: str) -> bool:
     return check_password_hash(password_hash, password)
 
 
-#api key generation
+# api generation 
 def generate_api_key() -> str:
     """Generate a secure random API key."""
     return secrets.token_hex(32)
 
 
-#authentication decorator
+# athentication decorator 
 def require_api_key(f):
     """Decorator to enforce API key authentication."""
     @wraps(f)
@@ -36,13 +36,13 @@ def require_api_key(f):
 
         if not user:
             return jsonify({"error": "Invalid API key"}), 403
-
         return f(*args, **kwargs)
 
     return decorated
 
-#user registration
-def create_user(email: str, password: str, role: str = "analyst"):
+
+# user registration
+def create_user(email: str, password: str):
     """Creates a new user with hashed password + API key."""
     password_hash = hash_password(password)
     api_key = generate_api_key()
@@ -51,7 +51,6 @@ def create_user(email: str, password: str, role: str = "analyst"):
         email=email,
         password_hash=password_hash,
         api_key_hash=api_key,
-        role=role
     )
 
     db.session.add(user)
@@ -60,10 +59,11 @@ def create_user(email: str, password: str, role: str = "analyst"):
     return {
         "email": user.email,
         "api_key": user.api_key_hash,
-        "role": user.role
+        "created_at": user.created_at.isoformat()
     }
 
-#login 
+
+# login
 def login(email: str, password: str):
     """Return API key if credentials are correct."""
     user = User.query.filter_by(email=email).first()
