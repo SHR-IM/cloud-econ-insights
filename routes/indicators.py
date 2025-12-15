@@ -4,9 +4,35 @@ from models import Indicator, db
 
 indicators_bp = Blueprint("indicators", __name__)
 
+# GET
 @indicators_bp.route("/", methods=["GET"])
 @require_api_key
 def get_indicators():
     indicators = Indicator.query.all()
-    data = [{"id": i.id, "code": i.code, "name": i.name} for i in indicators]
-    return jsonify(data)
+    data = [{"id": i.id, "code": i.code, "name": i.name, "description": i.description} for i in indicators]
+    return jsonify(data), 200
+
+
+# POST
+@indicators_bp.route("/", methods=["POST"])
+@require_api_key
+def create_indicator():
+    data = request.get_json(silent=True) or {}
+
+    code = data.get("code")
+    name = data.get("name")
+    description = data.get("description")
+
+    if not code or not name:
+        return jsonify({"error": "code and name are required"}), 400
+
+    indicator = Indicator(code=code, name=name, description=description)
+    db.session.add(indicator)
+    db.session.commit()
+
+    return jsonify({
+        "id": indicator.id,
+        "code": indicator.code,
+        "name": indicator.name,
+        "description": indicator.description
+    }), 201
