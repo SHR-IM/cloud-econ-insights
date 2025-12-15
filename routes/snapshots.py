@@ -17,7 +17,7 @@ def snapshot_to_dict(s: EconSnapshot):
     }
 
 # get
-@snapshots_bp.route("/snapshots", methods=["GET"])
+@snapshots_bp.route("/", methods=["GET"])
 @require_api_key
 def list_snapshots():
     query = EconSnapshot.query
