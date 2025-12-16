@@ -1,10 +1,9 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, g
 from auth import require_api_key
 from models import Indicator, db
 
 indicators_bp = Blueprint("indicators", __name__)
 
-# GET
 @indicators_bp.route("/", methods=["GET"])
 @require_api_key
 def get_indicators():
@@ -13,7 +12,6 @@ def get_indicators():
     return jsonify(data), 200
 
 
-# POST
 @indicators_bp.route("/", methods=["POST"])
 @require_api_key
 def create_indicator():
@@ -26,7 +24,12 @@ def create_indicator():
     if not code or not name:
         return jsonify({"error": "code and name are required"}), 400
 
-    indicator = Indicator(code=code, name=name, description=description)
+    indicator = Indicator(
+        code=code,
+        name=name,
+        description=description,
+        user_id=g.current_user.id
+    )
     db.session.add(indicator)
     db.session.commit()
 
