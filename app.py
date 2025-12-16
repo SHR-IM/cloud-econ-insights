@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from config import DevConfig
 from models import db
@@ -24,4 +25,5 @@ if __name__ == "__main__":
 	app = create_app()
 	port = int(os.environ.get("PORT", 8080))
 	app.run(host="0.0.0.0", port=port, debug=True)
+
 
