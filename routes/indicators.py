@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, g
 from auth import require_api_key
 from models import Indicator, db
 
-indicators_bp = Blueprint("indicators", __name__, strict_slashes=False)
+indicators_bp = Blueprint("indicators", __name__)
 
 @indicators_bp.route("/", methods=["GET"])
 @require_api_key
@@ -39,3 +39,4 @@ def create_indicator():
         "name": indicator.name,
         "description": indicator.description
     }), 201
+
