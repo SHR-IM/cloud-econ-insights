@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, g
 from models import db, EconSnapshot, Indicator
 from auth import require_api_key
 
-snapshots_bp = Blueprint("snapshots", __name__)
+snapshots_bp = Blueprint("snapshots", __name__, strict_slashes=False)
 
 
 def snapshot_to_dict(s: EconSnapshot):
