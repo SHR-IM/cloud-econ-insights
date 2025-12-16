@@ -1,11 +1,10 @@
 import secrets
 from functools import wraps
-from flask import request, jsonify
+from flask import request, jsonify, g
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db, User
 
-# password hashing 
 def hash_password(password: str) -> str:
     """Return a hashed password."""
     return generate_password_hash(password)
@@ -16,13 +15,11 @@ def verify_password(password: str, password_hash: str) -> bool:
     return check_password_hash(password_hash, password)
 
 
-# api generation 
 def generate_api_key() -> str:
     """Generate a secure random API key."""
     return secrets.token_hex(32)
 
 
-# athentication decorator 
 def require_api_key(f):
     """Decorator to enforce API key authentication."""
     @wraps(f)
@@ -36,12 +33,13 @@ def require_api_key(f):
 
         if not user:
             return jsonify({"error": "Invalid API key"}), 403
+
+        g.current_user = user
         return f(*args, **kwargs)
 
     return decorated
 
 
-# user registration
 def create_user(email: str, password: str):
     """Creates a new user with hashed password + API key."""
     password_hash = hash_password(password)
@@ -63,7 +61,6 @@ def create_user(email: str, password: str):
     }
 
 
-# login
 def login(email: str, password: str):
     """Return API key if credentials are correct."""
     user = User.query.filter_by(email=email).first()
