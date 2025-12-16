@@ -57,6 +57,9 @@ def create_snapshot():
     if not indicator_code or not country or year is None:
         return jsonify({"error": "indicator_code, country and year are required"}), 400
 
+    indicator_code = str(indicator_code)
+    year = int(year)
+
     indicator = Indicator.query.filter_by(code=indicator_code).first()
     if not indicator:
         return jsonify({"error": f"Indicator with code '{indicator_code}' not found"}), 404
