@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from models import db, EconSnapshot, Indicator
 from auth import require_api_key
 
@@ -16,7 +16,6 @@ def snapshot_to_dict(s: EconSnapshot):
         "fetched_at": s.fetched_at.isoformat() if s.fetched_at else None,
     }
 
-# get
 @snapshots_bp.route("/", methods=["GET"])
 @require_api_key
 def list_snapshots():
@@ -38,15 +37,14 @@ def list_snapshots():
     snapshots = query.all()
     return jsonify([snapshot_to_dict(s) for s in snapshots]), 200
 
-@snapshots_bp.route("/snapshots/<int:snapshot_id>", methods=["GET"])
+@snapshots_bp.route("/<int:snapshot_id>", methods=["GET"])
 @require_api_key
 def get_snapshot(snapshot_id):
     snapshot = EconSnapshot.query.get_or_404(snapshot_id)
     return jsonify(snapshot_to_dict(snapshot)), 200
 
 
-# post
-@snapshots_bp.route("/snapshots", methods=["POST"])
+@snapshots_bp.route("/", methods=["POST"])
 @require_api_key
 def create_snapshot():
     data = request.json or {}
@@ -65,6 +63,7 @@ def create_snapshot():
 
     snapshot = EconSnapshot(
         indicator_id=indicator.id,
+        user_id=g.current_user.id,
         country=country,
         year=year,
         value=value,
@@ -76,8 +75,7 @@ def create_snapshot():
     return jsonify(snapshot_to_dict(snapshot)), 201
 
 
-# put
-@snapshots_bp.route("/snapshots/<int:snapshot_id>", methods=["PUT"])
+@snapshots_bp.route("/<int:snapshot_id>", methods=["PUT"])
 @require_api_key
 def update_snapshot(snapshot_id):
     snapshot = EconSnapshot.query.get_or_404(snapshot_id)
@@ -94,8 +92,7 @@ def update_snapshot(snapshot_id):
     return jsonify(snapshot_to_dict(snapshot)), 200
 
 
-# delete 
-@snapshots_bp.route("/snapshots/<int:snapshot_id>", methods=["DELETE"])
+@snapshots_bp.route("/<int:snapshot_id>", methods=["DELETE"])
 @require_api_key
 def delete_snapshot(snapshot_id):
     snapshot = EconSnapshot.query.get_or_404(snapshot_id)
