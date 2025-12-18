@@ -8,7 +8,7 @@ The application provides secure, programmatic access to real-world economic data
 
 The project demonstrates core cloud computing concepts, including RESTful service design, external API integration, cloud deployment readiness, and scalable application architecture.
 
-⸻
+
 ## Project Motivation
 
 Economic and financial data is widely available through public APIs, but raw access alone is often insufficient for analysis, comparison, or reuse. Existing services typically lack:
@@ -19,7 +19,7 @@ Economic and financial data is widely available through public APIs, but raw acc
 
 This project addresses these limitations by providing a cloud-native API that enables users to define economic indicators of interest, retrieve real-world data, and store historical snapshots for future use.
 
-⸻
+
 
 ## System Architecture
 
@@ -32,7 +32,7 @@ The application follows a modular, cloud-ready architecture:
 
 The system is structured to support scalability, maintainability, and secure access in a cloud environment.
 
-⸻
+
 
 ## REST API Design
 
@@ -52,7 +52,7 @@ Endpoint	Description
 
 Authentication is required for protected endpoints and is enforced using API keys passed in request headers.
 
-⸻
+
 
 ## External REST Service Integration
 
@@ -67,7 +67,7 @@ The external API is accessed dynamically at runtime, and responses are processed
 
 This integration satisfies the requirement for external REST service usage.
 
-⸻
+
 
 ## Persistent Storage
 
@@ -80,7 +80,7 @@ Key stored entities include:
 
 In production, the application is designed to use a cloud-managed database service (DBaaS) to ensure durability, scalability, and availability.
 
-⸻
+
 
 ## Security Features
 
@@ -92,7 +92,7 @@ The system incorporates several security mechanisms:
 
 These features ensure secure access to user-specific resources and protect sensitive data.
 
-⸻
+
 
 ## Cloud Deployment
 
@@ -125,7 +125,7 @@ cloud-econ-insights/
 └── venv/                 # Development environment (local use)
 
 
-⸻
+
 
 ## Running the Application
 
@@ -150,14 +150,14 @@ The application will be available at:
 http://localhost:5000/
 
 
-⸻
+
 
 ## Team Project
 
 This is a group project, with responsibilities shared across team members.
 Development tasks were distributed across backend development, API integration, cloud configuration, and documentation.
 
-⸻
+
 
 ##References
 	•	World Bank Open Data API
@@ -167,7 +167,7 @@ https://flask.palletsprojects.com/
 	•	REST API Design Principles
 https://restfulapi.net/
 
-⸻
+
 
 ## Project Outcomes
 
@@ -179,5 +179,5 @@ This project successfully demonstrates:
 	•	Persistent data storage
 	•	Deployment considerations in a cloud environment
 
-⸻
+
 
