@@ -21,7 +21,7 @@ This project addresses these limitations by providing a cloud-native API that en
 
 ⸻
 
-🏗️ System Architecture
+## System Architecture
 
 The application follows a modular, cloud-ready architecture:
 	•	Backend Framework: Python Flask
@@ -34,7 +34,7 @@ The system is structured to support scalability, maintainability, and secure acc
 
 ⸻
 
-🔌 REST API Design
+## REST API Design
 
 The application exposes a RESTful API that follows standard REST principles:
 	•	Stateless requests
