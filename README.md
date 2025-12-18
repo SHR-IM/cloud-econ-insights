@@ -1,6 +1,6 @@
 # Cloud Economics Insights API
 
-📘 Project Overview
+## Project Overview
 
 Cloud Economics Insights API is a cloud-based RESTful application developed as part of the ECS781P – Cloud Computing module at Queen Mary University of London.
 
@@ -9,8 +9,7 @@ The application provides secure, programmatic access to real-world economic data
 The project demonstrates core cloud computing concepts, including RESTful service design, external API integration, cloud deployment readiness, and scalable application architecture.
 
 ⸻
-
-🎯 Project Motivation
+## Project Motivation
 
 Economic and financial data is widely available through public APIs, but raw access alone is often insufficient for analysis, comparison, or reuse. Existing services typically lack:
 	•	User-specific data management
@@ -55,7 +54,7 @@ Authentication is required for protected endpoints and is enforced using API key
 
 ⸻
 
-🌍 External REST Service Integration
+## External REST Service Integration
 
 The application integrates with the World Bank Open Data API, a public and authoritative source of global economic indicators.
 
@@ -70,7 +69,7 @@ This integration satisfies the requirement for external REST service usage.
 
 ⸻
 
-💾 Persistent Storage
+## Persistent Storage
 
 The application uses a database layer implemented with SQLAlchemy, allowing seamless switching between local and cloud-hosted databases.
 
@@ -83,7 +82,7 @@ In production, the application is designed to use a cloud-managed database servi
 
 ⸻
 
-🔐 Security Features
+## Security Features
 
 The system incorporates several security mechanisms:
 	•	API key–based authentication
@@ -95,7 +94,7 @@ These features ensure secure access to user-specific resources and protect sensi
 
 ⸻
 
-☁️ Cloud Deployment
+## Cloud Deployment
 
 The application is designed for deployment in a cloud environment and has been developed and tested using Google Cloud Platform (GCP).
 
@@ -107,7 +106,7 @@ Cloud-related features include:
 
 ⸻
 
-📁 Project Structure
+## Project Structure
 
 cloud-econ-insights/
 │
@@ -128,7 +127,7 @@ cloud-econ-insights/
 
 ⸻
 
-🚀 Running the Application
+## Running the Application
 
 Prerequisites
 	•	Python 3.9+
@@ -153,14 +152,14 @@ http://localhost:5000/
 
 ⸻
 
-👥 Team Project
+## Team Project
 
 This is a group project, with responsibilities shared across team members.
 Development tasks were distributed across backend development, API integration, cloud configuration, and documentation.
 
 ⸻
 
-📚 References
+##References
 	•	World Bank Open Data API
 https://data.worldbank.org/
 	•	Flask Documentation
@@ -170,7 +169,7 @@ https://restfulapi.net/
 
 ⸻
 
-✅ Project Outcomes
+## Project Outcomes
 
 This project successfully demonstrates:
 	•	REST-based service design
