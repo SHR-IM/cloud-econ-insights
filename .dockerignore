@@ -1,6 +1,12 @@
 .git
 .gitignore
+.env
+.env.*
 venv/
+.venv/
 __pycache__/
-*.pyc
-app.db
+*.py[cod]
+*.db
+*.sqlite*
+.pytest_cache/
+tests/

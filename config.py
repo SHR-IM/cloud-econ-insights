@@ -1,18 +1,22 @@
+"""Configuration for local and deployed Flask environments."""
 import os
+from pathlib import Path
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+basedir = Path(__file__).resolve().parent
+
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
+    SECRET_KEY = os.environ.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "DATABASE_URL",
-        "sqlite:///" + os.path.join(basedir, "app.db")
+        f"sqlite:///{basedir / 'app.db'}",
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class DevConfig(Config):
     DEBUG = True
 
+
 class ProdConfig(Config):
     DEBUG = False
-
